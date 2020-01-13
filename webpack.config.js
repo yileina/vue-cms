@@ -62,7 +62,7 @@ module.exports = {
               如果我们引用的图片，小于或等于给定的limit值，则不会被转为 base64 格式的字符串,如果大于limit给定的值
               ，则会被转化为 base64 格式的字符串；第二个参数name 的值 [name]表示图片原来的名称，.[ext]表示图片原来的扩展名
               , [hash:8]表示如果两张图片的名称相同时，由于每张图片的hash值不同，指定前8位就会显示不同图片*/
-            {test: /\.(jpg|png|gif|bmp|jpeg)$/,use:'url-loader?limit=7000&name=[hash:8]-[name].[ext]'},
+            {test: /\.(jpg|png|gif|bmp|jpeg)$/,use:[{loader:'url-loader',options:{esModule:false,name:'[hash:8]-[name].[ext]',limit:7000}}]},
 
             /* 配置处理 url 地址 中的 字体图标 的第三方 loader 规则， */
             {test: /\.(ttf|eot|svg|woff|woff2|otf)$/,use:'url-loader'},
@@ -71,7 +71,7 @@ module.exports = {
             { test:/\.js$/, use: 'babel-loader', exclude:/node_modules/ },
 
             /* 配置处理 vue 文件的laoder */
-            {test:/\.vue$/,use:'vue-loader'},
+            {test:/\.vue$/,use:['vue-loader']},
         ]
     },
 
